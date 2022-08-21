@@ -26,6 +26,17 @@ class Triangulo {
         //int getColumnas();
 		void generar_triangulo();	
 };
+
+class Circulo
+{
+private:
+	int diametro;
+public:
+	int tipo;
+	void setDiametro(int d);
+	int getDiametro();
+	void generar_circulo();
+};
 //--------------------------------------------------------------------------- SETTERS Y GETTERS
 //-------------------------------CUADRADO
 void Cuadrado::setFilas(int x)
@@ -53,20 +64,27 @@ void Triangulo::setFilas(int x)
     filas = x; 
 }
 
-//void Triangulo::setColumnas(int y)
-//{
-//    columnas = y; 
-//}
-
 int Triangulo::getFilas()
 {
     return filas;
 }
 
-//int Triangulo::getColumnas()
-//{
-//    return columnas;
-//}
+//--------------------------------CIRCULO
+void Circulo::setDiametro(int d)
+{
+	if(d>3)
+	{
+		diametro = d;
+	}
+	else
+	{
+		cout<<"\nIngrese otro valor mas grande "<<endl;
+	}
+}
+int Circulo::getDiametro()
+{
+	return diametro;
+}
 //--------------------------------------------------------------------------------METODOS (ACCIONES O VOIDS)
 //----------------------------------------------------CUADRADO
 void Cuadrado::generar_cuadrado()
@@ -130,6 +148,31 @@ void Triangulo::generar_triangulo()
 		cout<<"Opcion no encontrada "<<endl;
 	}
 }
+
+void Circulo::generar_circulo()
+{
+	if(tipo == 4)
+	{
+		for(int d=3; d<diametro; d++)
+		{
+			//for para los espacios a la izquierda
+			for(int i=0; i<(diametro-1)-d; i++)
+			{
+				cout<<" ";
+			}
+			//for para imprimir los *
+			for(int i=0; i<d+1; i++)
+			{
+				cout<<"*";
+			}
+			cout<<endl;
+		}
+	}
+	else
+	{
+		cout<<"Opcion no encontrada "<<endl;
+	}
+}
 //------------------------------------------------------------------------------MAIN 
 int main()
 {
@@ -141,10 +184,15 @@ int main()
 
 	Triangulo t;
 	t.setFilas(10);
+
+	Circulo cir;
+	cir.setDiametro(9);
+
 	cout<<"Tipos: "<<endl;
 	cout<<"1- cuadrado relleno "<<endl;
 	cout<<"2- cuadrado sin relleno "<<endl;
 	cout<<"3. triangulo relleno"<<endl;
+	cout<<"4. circulo relleno"<<endl;
 	cout<<"\nSelecciona el tipo: "<<endl;
 	cin>>opc;
 	
@@ -161,7 +209,11 @@ int main()
 	case 3:
 		t.tipo = 3;
 		t.generar_triangulo();
-		break;		
+		break;	
+	case 4:
+		cir.tipo = 4;
+		cir.generar_circulo();
+		break;	
 	default:
 		break;
 	}
