@@ -1,3 +1,4 @@
+
 #include <iostream>
 using namespace std;
 //------------------------------------------------------------------------
@@ -30,11 +31,14 @@ class Triangulo {
 class Circulo
 {
 private:
-	int diametro;
+	int filas;
+	int columnas;
 public:
 	int tipo;
-	void setDiametro(int d);
-	int getDiametro();
+	void setFilas(int x);
+	int getFilas();
+	void setColumnas(int y);
+	int getColumnas();
 	void generar_circulo();
 };
 //--------------------------------------------------------------------------- SETTERS Y GETTERS
@@ -70,20 +74,21 @@ int Triangulo::getFilas()
 }
 
 //--------------------------------CIRCULO
-void Circulo::setDiametro(int d)
+void Circulo::setFilas(int x)
 {
-	if(d>3)
-	{
-		diametro = d;
-	}
-	else
-	{
-		cout<<"\nIngrese otro valor mas grande "<<endl;
-	}
+		filas = x;
 }
-int Circulo::getDiametro()
+int Circulo::getFilas()
 {
-	return diametro;
+	return filas;
+}
+void Circulo::setColumnas(int y)
+{
+	columnas = y;	
+}
+int Circulo::getColumnas()
+{
+	return columnas;
 }
 //--------------------------------------------------------------------------------METODOS (ACCIONES O VOIDS)
 //----------------------------------------------------CUADRADO
@@ -148,24 +153,43 @@ void Triangulo::generar_triangulo()
 		cout<<"Opcion no encontrada "<<endl;
 	}
 }
-
+//------------------------------------------------------CIRCULO
 void Circulo::generar_circulo()
 {
 	if(tipo == 4)
 	{
-		for(int d=3; d<diametro; d++)
+		//FOR para hacerlo en sentido bien
+		for(int f=0; f<columnas; f++)
 		{
 			//for para los espacios a la izquierda
-			for(int i=0; i<(diametro-1)-d; i++)
+			for(int c=0; c<(columnas-1)-f;  c++)
 			{
 				cout<<" ";
 			}
-			//for para imprimir los *
-			for(int i=0; i<d+1; i++)
+			//for para imprimir los * i<(d*2)+1
+			for(int c=0; c<(f*2)+1; c++)
 			{
 				cout<<"*";
 			}
 			cout<<endl;
+		}
+		//FOR para sentido contrario
+		//cir.setFilas(9);
+		//cir.setColumnas(5);
+		for(int f=columnas-1; f>-1; f--)
+		{
+			//for para los espacios a la izquierda
+			for(int c=(columnas-1)-f; c>-1;  c--)
+			{
+				cout<<" ";
+			}
+			//for para imprimir los nasteriscos
+			for(int c=((f-1)*2); c>-1; c--)
+			{
+				cout<<"*";
+			}
+			cout<<endl;
+
 		}
 	}
 	else
@@ -186,7 +210,8 @@ int main()
 	t.setFilas(10);
 
 	Circulo cir;
-	cir.setDiametro(9);
+	cir.setFilas(11);
+	cir.setColumnas(6);
 
 	cout<<"Tipos: "<<endl;
 	cout<<"1- cuadrado relleno "<<endl;
